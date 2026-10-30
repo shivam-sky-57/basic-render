@@ -101,13 +101,7 @@ app.get('/', (req, res) => {
           <li><a href="/content">/content</a> &mdash; View the country timetable table</li>
         </ul>
 
-        <h3>How to deploy on Render:</h3>
-        <p>Create a <strong>Web Service</strong> on Render with:</p>
-        <ul>
-          <li><strong>Build Command:</strong> <code>npm install</code></li>
-          <li><strong>Start Command:</strong> <code>node server/server.js</code></li>
-          <li><strong>Environment Variable:</strong> <code>MONGO_URI</code> (your MongoDB Atlas connection string)</li>
-        </ul>
+
       </div>
     </body>
     </html>
@@ -286,9 +280,27 @@ app.get('/content', async (req, res) => {
 });
 
 // Start Server
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`- Main Page:    http://localhost:${PORT}/`);
-  console.log(`- Health Check: http://localhost:${PORT}/health`);
-  console.log(`- Content:      http://localhost:${PORT}/content`);
+const server = app.listen(PORT, '0.0.0.0', () => {
+  console.log(`🚀 Primary server listening on port ${PORT}`);
+  if (PORT == 80) {
+    console.log(`✨ Port 80 active: Browsers will hide the port number in the address bar!`);
+    console.log(`🌐 Open simulation links:`);
+    console.log(`   - Main Page:    http://simple-node-mongo-app.onrender.com/`);
+    console.log(`   - Health Check: http://simple-node-mongo-app.onrender.com/health`);
+    console.log(`   - Content:      http://simple-node-mongo-app.onrender.com/content`);
+  } else {
+    console.log(`- Main Page:    http://localhost:${PORT}/`);
+    console.log(`- Health Check: http://localhost:${PORT}/health`);
+    console.log(`- Content:      http://localhost:${PORT}/content`);
+  }
 });
+
+// Also open port 5000 as backup if primary is 80
+if (PORT == 80) {
+  try {
+    const backupServer = app.listen(5000, '0.0.0.0', () => {
+      console.log(`📡 Backup listener active on port 5000 (http://localhost:5000)`);
+    });
+    backupServer.on('error', () => {});
+  } catch (err) {}
+}
