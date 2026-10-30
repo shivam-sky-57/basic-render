@@ -1,0 +1,24 @@
+{
+  "name": "simple-render-node-mongo",
+  "version": "1.0.0",
+  "description": "Simple Node.js and MongoDB project with /, /health, and /content table endpoints for Render",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node server/server.js"
+  },
+  "keywords": [
+    "render",
+    "node",
+    "express",
+    "mongodb"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.9",
+    "express": "^5.3.0",
+    "mongoose": "^9.11.4"
+  }
+}
