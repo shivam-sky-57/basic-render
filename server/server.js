@@ -89,11 +89,7 @@ app.get('/', (req, res) => {
     <body>
       <div class="container">
         <h1>Simple Node & MongoDB Project</h1>
-        <p>This is a basic Node.js project ready to be deployed on Render.</p>
-        
-        <div class="info">
-          <strong>Database Status:</strong> ${dbStatus}
-        </div>
+
 
         <h3>Available Pages & Endpoints:</h3>
         <ul>
